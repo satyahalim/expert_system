@@ -1,7 +1,7 @@
 <?php
 $host     = "localhost";   // biasanya tetap localhost
 $user     = "root";        // ganti jika Anda pakai user lain
-$password = "";            // isi jika Anda pakai password untuk MySQL
+$password = "password";            // isi jika Anda pakai password untuk MySQL
 $database = "expertsys";  // ganti sesuai nama database Anda
 
 $conn = mysqli_connect($host, $user, $password, $database);

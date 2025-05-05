@@ -31,7 +31,7 @@ CREATE TABLE `gejala` (
   `id_gejala` int NOT NULL,
   `kode_gejala` varchar(100) NOT NULL,
   `nama_gejala` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `gejala`
@@ -68,7 +68,7 @@ CREATE TABLE `know_base` (
   `id_gejala` int NOT NULL,
   `id_kondisi` int NOT NULL,
   `value_cf` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `know_base`
@@ -105,7 +105,7 @@ CREATE TABLE `kondisi` (
   `kode_kondisi` varchar(100) NOT NULL,
   `kondisi` varchar(100) NOT NULL,
   `deskripsi` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `kondisi`

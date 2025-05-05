@@ -75,8 +75,8 @@ function cfToPercentage($cf) {
     
     .container {
       display: flex;
-      min-height: 100vh;
       width: 100%;
+      min-height: 100vh;
     }
     
     .sidebar {
@@ -180,10 +180,8 @@ function cfToPercentage($cf) {
     .main-content {
       width: 70%;
       padding: 40px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      overflow-y: auto; /* Enable vertical scrolling */
+      height: 100vh; /* Set height to viewport height */
     }
     
     .card {
@@ -196,6 +194,8 @@ function cfToPercentage($cf) {
       position: relative;
       overflow: hidden;
       margin-bottom: 30px;
+      margin-left: auto;
+      margin-right: auto;
     }
     
     .card::before {
@@ -208,6 +208,7 @@ function cfToPercentage($cf) {
       top: -150px;
       right: -150px;
       opacity: 0.1;
+      pointer-events: none; /* Ensure this doesn't block scrolling */
     }
     
     .card::after {
@@ -220,6 +221,7 @@ function cfToPercentage($cf) {
       bottom: -100px;
       left: -100px;
       opacity: 0.1;
+      pointer-events: none; /* Ensure this doesn't block scrolling */
     }
     
     .header {
@@ -370,6 +372,7 @@ function cfToPercentage($cf) {
       display: inline-block;
       transition: all 0.3s ease;
       margin-top: 20px;
+      margin-bottom: 20px;
     }
     
     .back-button:hover {
@@ -397,17 +400,21 @@ function cfToPercentage($cf) {
     @media (max-width: 1024px) {
       .container {
         flex-direction: column;
+        height: auto;
       }
       
       .sidebar {
         width: 100%;
         padding: 30px;
-        min-height: 300px;
+        min-height: auto;
+        height: auto;
       }
       
       .main-content {
         width: 100%;
         padding: 30px;
+        height: auto;
+        overflow-y: visible;
       }
       
       .sidebar h2 {
@@ -425,7 +432,6 @@ function cfToPercentage($cf) {
     
     @media (max-width: 640px) {
       .sidebar {
-        min-height: 250px;
         padding: 20px;
       }
       

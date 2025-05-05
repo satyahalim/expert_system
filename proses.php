@@ -1,37 +1,82 @@
 <?php
 include 'koneksi.php';
+session_start();
 
-if (isset($_POST['gejala'])) {
-    $gejala_terpilih = $_POST['gejala'];
-    $cf_kondisi = [];
-    $rekomendasi_diet = [];
 
-    // Ambil semua kondisi
-    $kondisi = mysqli_query($conn, "SELECT * FROM kondisi");
+// 1. Kumpulkan semua kode gejala yang jawabannya "ya"
+$kodeDipilih = [];
+for ($i = 1; $i <= 18; $i++) {
+    $kodename = sprintf('G%03d', $i); // G001, G002, ...
+    if (isset($_POST[$kodename]) && $_POST[$kodename] === 'ya') {
+        $kodeDipilih[] = $kodename;
+    }
+    // We explicitly ignore "tidak" responses
+}
 
-    while ($k = mysqli_fetch_assoc($kondisi)) {
-        $id_kondisi = $k['id_kondisi_tubuh'];
-        $nama_kondisi = $k['kondisi']; // Kolom 'kondisi' berisi nama kondisi tubuh seperti Ectomorph, Mesomorph, Endomorph
-        $cf_total = 0;
-        $cf_sementara = null;
+// Handle case with no "ya" answers
+if (empty($kodeDipilih)) {
+    die("Silakan jawab minimal satu pertanyaan dengan 'Ya'.");
+}
 
-        // Ambil semua gejala dan CF yang berhubungan dengan kondisi ini
-        foreach ($gejala_terpilih as $id_gejala) {
-            $query = mysqli_query($conn, "SELECT value_cf FROM know_base WHERE id_kondisi = $id_kondisi AND id_gejala = $id_gejala");
-            if ($row = mysqli_fetch_assoc($query)) {
-                $cf = $row['value_cf'];
-                if ($cf_sementara === null) {
-                    $cf_sementara = $cf;
-                } else {
-                    // Gabungkan CF (Certainty Factor combination formula)
-                    $cf_sementara = $cf_sementara + $cf * (1 - $cf_sementara);
-                }
+// 2. Dari kode gejala, cari id_gejala numeriknya
+$inList = "'" . implode("','", $kodeDipilih) . "'"; 
+$sql = "SELECT id_gejala, kode_gejala
+        FROM gejala
+        WHERE kode_gejala IN ($inList)";
+$res = mysqli_query($conn, $sql);
+
+
+$gejalaTerpilih = [];  // akan berisi id_gejala numeric
+while ($row = mysqli_fetch_assoc($res)) {
+    $gejalaTerpilih[] = $row['id_gejala'];
+}
+
+
+// 3. Calculate CF for each condition
+$cf_kondisi = [];
+$rekomendasi_diet = [];
+$kondisi = mysqli_query($conn, "SELECT * FROM kondisi");
+
+
+while ($k = mysqli_fetch_assoc($kondisi)) {
+    $id_kondisi = $k['id_kondisi_tubuh'];
+    $nama_kondisi = $k['kondisi'];
+    $cf_sementara = null;
+    
+    // Track which symptoms actually contributed to this condition
+    $gejala_berkontribusi = [];
+    
+    foreach ($gejalaTerpilih as $id_gejala) {
+        $q = mysqli_query($conn,
+            "SELECT value_cf 
+             FROM know_base 
+             WHERE id_kondisi = $id_kondisi 
+               AND id_gejala = $id_gejala"
+        );
+        
+        if ($r = mysqli_fetch_assoc($q)) {
+            $cf = (float)$r['value_cf'];
+            $gejala_berkontribusi[] = $id_gejala;
+            
+            if ($cf_sementara === null) {
+                $cf_sementara = $cf;
+            } else {
+                // formula CF combination: CF1 + CF2 * (1 - CF1)
+                $cf_sementara = $cf_sementara + $cf * (1 - $cf_sementara);
             }
         }
 
-        if ($cf_sementara !== null) {
-            $cf_kondisi[$id_kondisi] = $cf_sementara;
-
+    }
+    
+   
+        // Only include conditions where at least one symptom contributes
+        if (!empty($gejala_berkontribusi)) {
+            $cf_kondisi[$id_kondisi] = [
+                'nilai' => $cf_sementara, 
+                'gejala' => $gejala_berkontribusi
+            ];
+        
+        
             // Tambahkan rekomendasi diet berdasarkan kondisi tubuh
             switch (strtolower($nama_kondisi)) {
                 case 'ectomorph':
@@ -90,5 +135,5 @@ if (isset($_POST['gejala'])) {
     exit;
 } else {
     echo "Tidak ada gejala yang dipilih.";
+
 }
-?>

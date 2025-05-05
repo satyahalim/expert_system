@@ -133,7 +133,3 @@ while ($k = mysqli_fetch_assoc($kondisi)) {
     $_SESSION['rekomendasi_diet'] = $rekomendasi_diet;
     header('Location: hasil.php');
     exit;
-} else {
-    echo "Tidak ada gejala yang dipilih.";
-
-}

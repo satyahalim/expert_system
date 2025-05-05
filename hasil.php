@@ -11,6 +11,9 @@ include 'koneksi.php';
 
 $cf_kondisi = $_SESSION['cf_kondisi'];
 
+$hasil_utama_id = key($cf_kondisi);
+$nilai_utama = current($cf_kondisi);
+
 // Sort conditions by CF value (descending)
 uasort($cf_kondisi, function($a, $b) {
     return $b['nilai'] <=> $a['nilai'];
@@ -50,6 +53,7 @@ function cfToPercentage($cf) {
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: left;
         }
         h1, h2 {
             color: #4a6790;
@@ -128,6 +132,23 @@ function cfToPercentage($cf) {
                     }
                 ?>
             </ul>
+        </div>
+
+        <div class="container">
+            <h3>Rekomendasi Diet:</h3>
+            <?php
+            if(isset($_SESSION['rekomendasi_diet']) && isset ($_SESSION['rekomendasi_diet'][$hasil_utama_id])){
+                $rekomendasi = $_SESSION['rekomendasi_diet'][$hasil_utama_id];
+                if(is_array($rekomendasi)){
+                    echo "<ul>";
+                    foreach($rekomendasi as $kategori => $menu){
+                        echo "<li><strong>" . ucfirst($kategori) . "</strong> $menu </li>";
+                    }
+                    echo "</ul>";
+                } else{
+                    echo $rekomendasi;
+                }
+            } ?>
         </div>
         
         <div class="other-results">

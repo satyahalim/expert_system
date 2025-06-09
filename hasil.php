@@ -450,6 +450,28 @@ function cfToPercentage($cf) {
       .result-box, .description, .recommendations {
         padding: 20px;
       }
+
+        .funny-image-card {
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  padding: 25px;
+  text-align: center;
+  margin-top: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.funny-img {
+  display: block;         /* supaya bisa diatur marginnya */
+  margin: 0 auto 15px;    /* center horizontal + bottom spacing */
+  max-width: 300px;       /* batas lebar maksimal */
+  width: 100%;            /* fleksibel */
+  height: auto;           /* biar tidak terdistorsi */
+  border-radius: 16px;
+  object-fit: contain;
+}
     }
   </style>
 </head>
@@ -505,6 +527,16 @@ function cfToPercentage($cf) {
           <p>Tingkat Keyakinan: <?php echo cfToPercentage($highest_cf); ?>%</p>
         </div>
         
+        <div class="funny-image-card">
+        <?php if ($kondisi_data['kondisi'] == "Endomorph") { ?> 
+          <img src="./uploads/endomorph.jpg" alt="endomorph" class="funny-img">
+        <?php } elseif ($kondisi_data['kondisi'] == "Ectomorph") { ?>
+          <img src="./uploads/ectomorph.jpg" alt="ectomorph" class="funny-img">
+        <?php } else { ?>
+          <img src="./uploads/mesomorph.jpg" alt="mesomorph" class="funny-img">
+        <?php } ?>
+      </div>
+
         <div class="description">
           <h3>Deskripsi:</h3>
           <p><?php echo $kondisi_data['deskripsi']; ?></p>

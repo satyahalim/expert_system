@@ -136,6 +136,29 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
+      position: relative;
+    }
+    
+    .admin-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 8px 16px;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: var(--dark);
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .admin-link:hover {
+      background-color: var(--primary);
+      color: white;
+      transform: translateY(-2px);
     }
     
     .card {
@@ -386,6 +409,13 @@
       .card-title {
         font-size: 24px;
       }
+      
+      .admin-link {
+        position: static;
+        margin-bottom: 20px;
+        display: inline-block;
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -429,6 +459,8 @@
   </section>
   
   <section class="main-content">
+    <a href="admin_login.php" class="admin-link">🔧 Admin Panel</a>
+    
     <div class="card">
       <header class="header">
         <div class="eyebrow">Sistem Pakar</div>

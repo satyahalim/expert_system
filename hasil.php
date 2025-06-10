@@ -88,7 +88,7 @@ function cfToPercentage($cf) {
       </header>
       
       <div class="cards-container">
-        <!-- Main Result Card (Left) -->
+        
         <div class="card main-result-card">
           <div class="result-box">
             <h2>Tipe tubuh Anda adalah: <?php echo $kondisi_data['kondisi']; ?></h2>

@@ -18,8 +18,9 @@
 }
 
 html, body {
-  height: 100%;
+  height: 200%;
   margin: 0;
+  scroll-behavior: smooth; /* Smooth scrolling */
 }
 
 body {
@@ -28,6 +29,30 @@ body {
   color: var(--dark);
   min-height: 100vh;
   overflow-x: hidden;
+  /* Global scrollbar styling */
+  scrollbar-width: 300px; /* Firefox */
+  scrollbar-color: var(--primary) #E2E8F0; /* Firefox */
+}
+
+/* Global scrollbar for Webkit browsers */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E2E8F0;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 6px;
+  border: 2px solid #E2E8F0;
+  min-height: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5A52E0;
 }
 
 /* Container Layouts */
@@ -161,6 +186,33 @@ body {
 .main-content.scrollable {
   overflow-y: auto;
   height: 100vh;
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: var(--primary) #E2E8F0; /* Firefox */
+}
+
+/* Custom Scrollbar for Webkit browsers (Chrome, Safari, Edge) */
+.main-content.scrollable::-webkit-scrollbar {
+  width: 12px;
+}
+
+.main-content.scrollable::-webkit-scrollbar-track {
+  background: #E2E8F0;
+  border-radius: 6px;
+}
+
+.main-content.scrollable::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 6px;
+  border: 2px solid #E2E8F0;
+}
+
+.main-content.scrollable::-webkit-scrollbar-thumb:hover {
+  background: #5A52E0;
+}
+
+/* Ensure scrollbar is always visible */
+.main-content.scrollable::-webkit-scrollbar-thumb {
+  min-height: 20px;
 }
 
 .main-content.admin {
@@ -490,10 +542,10 @@ body {
   background-color: var(--accent);
 }
 
-/* Somatotype Image Display */
+/* Somatotype Image Display - FIXED */
 .somatotype-image-section {
-  margin: 30px 0;
-  padding: 30px;
+  margin: 20px 0;
+  padding: 20px;
   background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(67, 203, 255, 0.05));
   border-radius: 20px;
   text-align: center;
@@ -501,8 +553,8 @@ body {
 
 .somatotype-image-section h3 {
   color: var(--dark);
-  margin-bottom: 25px;
-  font-size: 22px;
+  margin-bottom: 20px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -510,22 +562,22 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .somatotype-visual {
   position: relative;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  max-width: 400px;
+  max-width: 250px; /* Reduced from 400px */
   width: 100%;
 }
 
 .somatotype-visual:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .somatotype-visual.ecto {
@@ -542,14 +594,15 @@ body {
 
 .somatotype-img {
   width: 100%;
-  height: 300px;
-  object-fit: cover;
+  height: 200px; /* Reduced from 300px */
+  object-fit: contain; /* Changed from 'cover' to 'contain' to prevent cropping */
   display: block;
+  background-color: #f8f9fa; /* Add background color for transparency support */
 }
 
 .somatotype-placeholder {
   width: 100%;
-  height: 300px;
+  height: 200px; /* Reduced from 300px */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -571,17 +624,17 @@ body {
 }
 
 .placeholder-icon {
-  font-size: 60px;
-  margin-bottom: 15px;
+  font-size: 50px; /* Reduced from 60px */
+  margin-bottom: 10px;
 }
 
 .somatotype-badge {
-  padding: 15px 25px;
+  padding: 12px 20px; /* Reduced from 15px 25px */
   border-radius: 15px;
   color: white;
   font-weight: 600;
   text-align: center;
-  min-width: 250px;
+  min-width: 200px; /* Reduced from 250px */
 }
 
 .somatotype-badge.ecto {
@@ -598,13 +651,13 @@ body {
 
 .badge-text {
   display: block;
-  font-size: 18px;
-  margin-bottom: 5px;
+  font-size: 16px; /* Reduced from 18px */
+  margin-bottom: 3px;
 }
 
 .confidence {
   display: block;
-  font-size: 14px;
+  font-size: 13px; /* Reduced from 14px */
   opacity: 0.9;
 }
 
@@ -828,7 +881,246 @@ button:disabled {
   width: 100%;
 }
 
-/* Results/Analysis */
+/* Diet Recommendations Section - COMPACT */
+.diet-recommendations-section {
+  margin: 20px 0; /* Reduced from 30px */
+  padding: 20px; /* Reduced from 30px */
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.02), rgba(67, 203, 255, 0.02));
+  border-radius: 16px; /* Reduced from 20px */
+  border: 1px solid rgba(108, 99, 255, 0.1);
+}
+
+.diet-recommendations-section.compact {
+  margin: 15px 0;
+  padding: 15px;
+}
+
+.diet-recommendations-section h3 {
+  color: var(--dark);
+  margin-bottom: 15px; /* Reduced from 25px */
+  font-size: 20px; /* Reduced from 24px */
+  font-weight: 700;
+  text-align: center;
+}
+
+.diet-card {
+  background: white;
+  border-radius: 12px; /* Reduced from 16px */
+  padding: 20px; /* Reduced from 25px */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); /* Reduced shadow */
+  border-left: 4px solid; /* Reduced from 5px */
+  margin-bottom: 15px; /* Reduced from 20px */
+}
+
+.diet-card.compact {
+  padding: 15px;
+  margin-bottom: 10px;
+}
+
+.diet-card.ecto {
+  border-left-color: var(--primary);
+}
+
+.diet-card.meso {
+  border-left-color: var(--secondary);
+}
+
+.diet-card.endo {
+  border-left-color: var(--accent);
+}
+
+.diet-header {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Reduced from 15px */
+  margin-bottom: 15px; /* Reduced from 20px */
+  padding-bottom: 10px; /* Reduced from 15px */
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.diet-icon {
+  font-size: 24px; /* Reduced from 32px */
+  padding: 8px; /* Reduced from 10px */
+  border-radius: 10px; /* Reduced from 12px */
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.diet-card.ecto .diet-icon {
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.diet-card.meso .diet-icon {
+  background: rgba(255, 101, 132, 0.1);
+}
+
+.diet-card.endo .diet-icon {
+  background: rgba(67, 203, 255, 0.1);
+}
+
+.diet-header h4 {
+  color: var(--dark);
+  font-size: 18px; /* Reduced from 20px */
+  font-weight: 700;
+  margin: 0;
+}
+
+/* NEW COMPACT LAYOUT */
+.diet-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.macro-section h5,
+.meal-section h5 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--dark);
+}
+
+.macro-breakdown.compact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px; /* Reduced from 15px */
+}
+
+.macro-item {
+  text-align: center;
+  padding: 10px; /* Reduced from 15px */
+  background: var(--light);
+  border-radius: 8px; /* Reduced from 12px */
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.diet-card.ecto .macro-item:hover {
+  border-color: var(--primary);
+  background: rgba(108, 99, 255, 0.05);
+}
+
+.diet-card.meso .macro-item:hover {
+  border-color: var(--secondary);
+  background: rgba(255, 101, 132, 0.05);
+}
+
+.diet-card.endo .macro-item:hover {
+  border-color: var(--accent);
+  background: rgba(67, 203, 255, 0.05);
+}
+
+.macro-label {
+  display: block;
+  font-size: 12px; /* Reduced from 14px */
+  color: #64748B;
+  font-weight: 500;
+  margin-bottom: 4px; /* Reduced from 5px */
+}
+
+.macro-value {
+  display: block;
+  font-size: 20px; /* Reduced from 24px */
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.meal-examples {
+  background: var(--light);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 3px solid;
+}
+
+.diet-card.ecto .meal-examples {
+  border-left-color: var(--primary);
+}
+
+.diet-card.meso .meal-examples {
+  border-left-color: var(--secondary);
+}
+
+.diet-card.endo .meal-examples {
+  border-left-color: var(--accent);
+}
+
+.meal-examples p {
+  margin: 6px 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: #64748B;
+}
+
+.meal-examples strong {
+  color: var(--dark);
+  font-weight: 600;
+}
+
+.tips-compact {
+  background: rgba(0, 0, 0, 0.02);
+  padding: 12px; /* Reduced from 20px */
+  border-radius: 8px; /* Reduced from 12px */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.tips-compact h5 {
+  color: var(--dark);
+  font-size: 14px; /* Reduced from 16px */
+  font-weight: 600;
+  margin: 0 0 8px 0; /* Reduced from 15px */
+}
+
+.tips-compact p {
+  color: #64748B;
+  font-size: 13px; /* Reduced from 14px */
+  line-height: 1.4;
+  margin: 0;
+}
+
+.general-recommendations {
+  margin-top: 20px; /* Reduced from 30px */
+  padding: 15px; /* Reduced from 25px */
+  background: white;
+  border-radius: 12px; /* Reduced from 16px */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04); /* Reduced shadow */
+}
+
+.general-recommendations.compact {
+  margin-top: 15px;
+  padding: 12px;
+}
+
+.general-recommendations h4 {
+  color: var(--dark);
+  font-size: 16px; /* Reduced from 18px */
+  font-weight: 700;
+  margin: 0 0 12px 0; /* Reduced from 20px */
+  text-align: center;
+}
+
+.general-tips.compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.general-tips.compact span {
+  display: inline-block;
+  padding: 6px 10px;
+  background: var(--light);
+  border-radius: 20px;
+  font-size: 12px;
+  color: #64748B;
+  border: 1px solid rgba(108, 99, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.general-tips.compact span:hover {
+  background: rgba(108, 99, 255, 0.05);
+  border-color: var(--primary);
+}
+
 .result-box {
   margin: 20px 0;
   padding: 25px;
@@ -850,8 +1142,8 @@ button:disabled {
 
 .description, .recommendations {
   text-align: left;
-  padding: 25px;
-  margin: 20px 0;
+  padding: 20px; /* Reduced from 25px */
+  margin: 15px 0; /* Reduced from 20px */
   background-color: var(--light);
   border-radius: 16px;
 }
@@ -859,13 +1151,14 @@ button:disabled {
 .description h3, .recommendations h3 {
   color: var(--dark);
   margin-bottom: 15px;
-  font-size: 20px;
+  font-size: 18px; /* Reduced from 20px */
   font-weight: 600;
 }
 
 .description p, .recommendations p {
-  margin-bottom: 15px;
+  margin-bottom: 12px; /* Reduced from 15px */
   line-height: 1.6;
+  font-size: 14px;
 }
 
 .description ul, .recommendations ul {
@@ -874,48 +1167,50 @@ button:disabled {
 }
 
 .description li, .recommendations li {
-  margin-bottom: 8px;
+  margin-bottom: 6px; /* Reduced from 8px */
   line-height: 1.5;
+  font-size: 14px;
 }
 
 .other-results {
-  margin-top: 30px;
+  margin-top: 25px; /* Reduced from 30px */
   text-align: left;
   width: 100%;
 }
 
 .other-results h3 {
   color: var(--dark);
-  margin-bottom: 20px;
-  font-size: 20px;
+  margin-bottom: 15px; /* Reduced from 20px */
+  font-size: 18px; /* Reduced from 20px */
   font-weight: 600;
 }
 
 .other-results p {
   margin-bottom: 5px;
   font-weight: 500;
+  font-size: 14px;
 }
 
 .progress-bar {
   width: 100%;
   background-color: #E2E8F0;
   border-radius: 12px;
-  margin: 10px 0 20px 0;
+  margin: 8px 0 15px 0; /* Reduced margins */
   overflow: hidden;
 }
 
 .progress {
-  height: 24px;
+  height: 20px; /* Reduced from 24px */
   border-radius: 12px;
   background-color: var(--primary);
   text-align: right;
-  padding-right: 15px;
+  padding-right: 12px; /* Reduced from 15px */
   color: white;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 12px; /* Reduced from 14px */
   transition: width 0.8s ease;
 }
 
@@ -1042,6 +1337,28 @@ button:disabled {
   overflow-x: auto;
   max-height: 500px;
   overflow-y: auto;
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: var(--primary) #E2E8F0; /* Firefox */
+}
+
+.table-container::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #E2E8F0;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+  min-height: 20px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #5A52E0;
 }
 
 table {
@@ -1339,7 +1656,7 @@ th {
   
   .main-content.scrollable {
     height: auto;
-    overflow-y: visible;
+    overflow-y: auto; /* Keep scrolling enabled on mobile */
   }
   
   .sidebar h2 {
@@ -1376,6 +1693,37 @@ th {
     padding: 10px 15px;
     font-size: 14px;
   }
+  
+  .diet-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* Utility class for scrollable content */
+.scrollable-content {
+  overflow-y: auto;
+  scrollbar-width: auto; /* Firefox */
+  scrollbar-color: var(--primary) #E2E8F0; /* Firefox */
+}
+
+.scrollable-content::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: #E2E8F0;
+  border-radius: 5px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 5px;
+  min-height: 20px;
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+  background: #5A52E0;
 }
 
 @media (max-width: 640px) {
@@ -1422,24 +1770,43 @@ th {
   }
   
   .somatotype-image-section {
-    padding: 20px;
-    margin: 20px 0;
+    padding: 15px; /* Further reduced */
+    margin: 15px 0; /* Further reduced */
   }
   
   .somatotype-img, .somatotype-placeholder {
-    height: 250px;
+    height: 180px; /* Further reduced for mobile */
   }
   
   .somatotype-badge {
-    min-width: 200px;
-    padding: 12px 20px;
+    min-width: 180px; /* Further reduced */
+    padding: 10px 15px; /* Further reduced */
   }
   
   .badge-text {
-    font-size: 16px;
+    font-size: 14px; /* Further reduced */
   }
   
   .placeholder-icon {
-    font-size: 45px;
+    font-size: 40px; /* Further reduced */
+  }
+  
+  .diet-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  
+  .macro-breakdown.compact {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .general-tips.compact {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .general-tips.compact span {
+    text-align: center;
   }
 }

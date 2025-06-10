@@ -9,7 +9,7 @@
 
 A comprehensive web-based expert system that determines somatotype (body type) using certainty factor methodology. Features modern design, complete admin panel, and enhanced image display.
 
-![Demo Screenshot]
+
 ![image](https://github.com/user-attachments/assets/c83946f8-267d-4a78-b152-226e73b254bc)
 
 

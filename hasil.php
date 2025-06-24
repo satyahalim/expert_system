@@ -192,7 +192,7 @@ function cfToPercentage($cf) {
             ?>
           </div>
           
-          <a href="survei.php" class="back-button">Kembali ke Kuesioner</a>
+          <a href="index.php" class="back-button">Kembali ke Kuesioner</a>
         </div>
         
         <!-- Diet Recommendations Card (Right) -->
